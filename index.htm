@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>ta ha - a skateboard video by don luong</title>
+	<meta name="desc" content="ta-ha: a skateboard video by don luong featuring nick garcia, derrick wilson, brian price, billy davenport, alec jamir, jordan vititow, ben fisher, michael o'toole and other local skateboarders." />
+	<meta name="keywords" content="ta, ha, taha, ta-ha, ta ha, skateboarding, video, movie, skate, socal, southern, california, orange county, don, luong, furnace, skate shop" />
+	<meta name="medium" content="mult" />
+	<link rel="image_src" href="http://ta-ha.com/images/ta-ha-thumb.jpg" />
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script type="text/javascript">
+	jQuery(function ($) {
+		$.fn.overlay_in = function () {
+			events.screen.open();
+			this.animate({ left: '40%' }, 500, 'linear');
+		}
+		$.fn.overlay_out = function () {
+			this.animate({ left: '110%' }, 500, 'linear');
+			events.screen.close();
+		}
+
+		var a = $('a:not(.link)').click(function (e) {
+			e.preventDefault();
+		});
+		var screen = $('#screen');
+		screen.dblclick(function () { events.clear() });
+		var banners = $('#banners');
+		banners.link = a.filter('#banners-link').click(function () { events.banners.open(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Banners']); });
+		var trailer = $('#trailer');
+		trailer.link = a.filter('#trailer-link').click(function () { events.trailer.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Trailer']); });
+		var fisher = $('#fisher');
+		fisher.link = a.filter('#fisher-link').click(function () { events.fisher.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Fisher']); });
+		var billy = $('#billy');
+		billy.link = a.filter('#billy-link').click(function () { events.billy.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Billy']); });
+		var derrick = $('#derrick');
+		derrick.link = a.filter('#derrick-link').click(function () { events.derrick.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Derrick']); });
+		var alec = $('#alec');
+		alec.link = a.filter('#alec-link').click(function () { events.alec.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Alec']); });
+		var coverage = $('#coverage');
+		coverage.link = a.filter('#coverage-link').click(function () { events.coverage.open(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Coverage']); });
+		var buy = $('#buy');
+		buy.link = a.filter('#buy-link').click(function () { _gaq.push(['_trackEvent', 'Links', 'Click', 'Buy']); location.href = this.href; });
+		var order_canceled = $('#order-canceled');
+		var order_success = $('#order-success');
+
+		var events = {
+			trailer: {
+				play: function () {
+					trailer.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Trailer']);
+				},
+				close: function () {
+					trailer.overlay_out();
+				}
+			},
+			fisher: {
+				play: function () {
+					fisher.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Fisher']);
+				},
+				close: function () {
+					fisher.overlay_out();
+				}
+			},
+			billy: {
+				play: function () {
+					billy.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Billy']);
+				},
+				close: function () {
+					billy.overlay_out();
+				}
+			},
+			derrick: {
+				play: function () {
+					derrick.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Derrick']);
+				},
+				close: function () {
+					derrick.overlay_out();
+				}
+			},
+			alec: {
+				play: function () {
+					alec.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Alec']);
+				},
+				close: function () {
+					alec.overlay_out();
+				}
+			},
+			banners: {
+				open: function () {
+					banners.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Banners']);
+				},
+				close: function () {
+					banners.overlay_out();
+				}
+			},
+			coverage: {
+				open: function () {
+					coverage.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Coverage']);
+				},
+				close: function () {
+					coverage.overlay_out();
+				}
+			},
+			buy: {
+				open: function () {
+					buy.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Buy']);
+				},
+				close: function () {
+					buy.overlay_out();
+				}
+			},
+			order_canceled: {
+				open: function () {
+					order_canceled.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Order Canceled']);
+				},
+				close: function () {
+					order_canceled.overlay_out();
+				}
+			},
+			order_success: {
+				open: function () {
+					order_success.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Order Success']);
+				},
+				close: function () {
+					order_success.overlay_out();
+				}
+			},
+			screen: {
+				open: function () {
+					screen.fadeIn();
+				},
+				close: function () {
+					screen.fadeOut();
+				}
+			},
+			clear: function () {
+				if (screen.is(':visible')) {
+					events.trailer.close();
+					events.fisher.close();
+					events.billy.close();
+					events.derrick.close();
+					events.alec.close();
+					events.banners.close();
+					events.coverage.close();
+					events.buy.close();
+					events.order_canceled.close();
+					events.order_success.close();
+				}
+			}
+		} // events
+
+		/* esc */
+		$(document).keydown(function (e) {
+			var keycode = (e) ? e.which : event.keyCode;
+			if (keycode == 27) // esc key
+				events.clear();
+		});
+
+		_typeface_js.configure({ disableSelection: true });
+
+		switch (location.search) {
+			case '?teaser':
+			case '?promo':
+			case '?video':
+			case '?trailer':
+				events.trailer.play();
+				break;
+			case '?fisher':
+				events.fisher.play();
+				break;
+			case '?billy':
+				events.billy.play();
+				break;
+			case '?derrick':
+				events.derrick.play();
+				break;
+			case '?alec':
+				events.alec.play();
+				break;
+			case '?banners':
+				events.banners.open();
+				break;
+			case '?coverage':
+				events.coverage.open();
+				break;
+			case '?buy':
+				events.buy.open();
+				break;
+			case '?order-canceled':
+				events.order_canceled.open();
+				break;
+			case '?order-success':
+				events.order_success.open();
+				break;
+			default:
+				break;
+		}
+
+		// weird chrome bug fix
+		$('body').css({ backgroundColor: '#fff' });
+
+	});
+	</script>
+	<script type="text/javascript" src="js/typeface.js"></script>
+	<script type="text/javascript" src="js/typeface.folks-bold.js"></script>
+	<style type="text/css">
+		html { height: 100% }
+		body { margin: 0px; background: url(images/ta-ha-bg.jpg) no-repeat 70% 50%; height: 100%; width: 100%; overflow: hidden; font: normal 12px Arial }
+		h1 { margin: 0px; padding: 7% 0px 0px 7%; font: bold 80px/.6em folks, sans-serif; color: white; position: relative; z-index: 50; float: left }
+		h1 span { display: block; font: bold 30px/30px folks, sans-serif; margin-top: 15px }
+		h1 strong { display: block; font: bold 20px/.2em folks, sans-serif }
+		.clear { display: block; clear: both }
+		.fixed { position: fixed; top: 0px; left: 0px; padding: 0 1%; width: 98%; background: white; opacity: .8; z-index: 50 }
+		.fixed h2 a { font: bold 20px folks, sans-serif; color: white; text-align: center; display: block }
+		.fixed h2 strong { font: bold 50px/.6em folks, sans-serif; vertical-align: bottom }
+		#links { position: absolute; bottom: 4%; left: 7%; opacity: .8; width: 100% }
+		#links a { font: bold 22px folks, sans-serif; color: #aaa; background: white; border: solid 5px white; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; display: block; float: left; padding: 10px; margin: 5px; text-decoration: none }
+		#links a:hover { background: #aaa; color: white }
+		.overlay { background: white; border: solid 10px white; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; position: absolute; top: 11%; left: 110%; z-index: 50 }
+		.overlay h3.title { font: bold 16px folks, sans-serif }
+		.overlay h3.title strong { font: bold 50px/.6em folks, sans-serif; display: block; margin-bottom: 20px }
+		.overlay h3.title span { font: bold 30px/.6em folks, sans-serif; vertical-align: middle }
+		#premiere { display: none }
+		#buy, #order-canceled, #order-success { width: 400px }
+		#buy-link { color: purple; text-decoration: none }
+		#buy_button { display: block; margin: 5px auto }
+		#banners { width: 526px }
+		#banners img { height: 250px }
+		#trailer { width: 480px; height: 390px }
+		#fisher { width: 600px; height: 443px }
+		#billy, #derrick, #alec { width: 480px; height: 390px }
+		#coverage { width: 400px }
+		#coverage a.link { display: block; background: #eee; padding: 2px 5px; margin: 2px 0px; float: left; clear: left; font: bold 14px sans-serif; color: #333 }
+		#coverage a:hover { background: #333; color: #eee }
+		#coverage a:before { content: "› " }
+		#screen { display: none; position: fixed; top: 0px; left: 0px; z-index: 20; width: 100%; height: 100%; background: black; opacity: .7 }
+		#screen strong { font: bold 30px/.6em folks, sans-serif; color: white; position: absolute; bottom: 10%; right: 7% }
+		#screen big { vertical-align: middle }
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1>
+			ta ha
+			<strong>a skateboard video by don luong</strong>
+			<span>featuring</span>
+			<strong>nick garcia</strong>
+			<strong>derrick wilson</strong>
+			<strong>brian price</strong>
+			<strong>billy davenport</strong>
+			<strong>alec jamir</strong>
+			<strong>jordan vititow</strong>
+			<strong>ben fisher</strong>
+			<strong>michael o'toole</strong>
+			<strong>and many more...</strong>
+		</h1>
+		<div id="premiere" class="fixed">
+			<h2><strong>ta ha</strong> premiere @ art theater / 4th & cherry, long beach, ca / sat dec 18, 2010 / 9pm / $2 entry</h2>
+		</div>
+		<div id="buy-now" class="fixed">
+			<h2><a id="buy-link" href="?buy"><strong>buy ta ha</strong> on DVD now!</a></h2>
+		</div>
+		<div id="links">
+			<a id="trailer-link" href="?trailer">watch the trailer</a>
+			<a id="fisher-link" href="?fisher">watch ben fishers part</a>
+			<a id="derrick-link" href="?derrick">watch derrick wilsons part</a>
+			<span class="clear"></span>
+			<a id="alec-link" href="?alec">watch alec jamirs part</a>
+			<a id="billy-link" href="?billy">watch billy davenports part</a>
+			<a id="banners-link" href="?banners">spread the word</a>
+			<a id="coverage-link" href="?coverage">coverage</a>
+		</div>
+		<div id="buy" class="overlay">
+			<h3 class="title"><strong>buy ta ha online</strong></h3>
+			<p>You can purchase your DVD copy of <strong>ta ha</strong> online for <strong>$15</strong> (which includes tax and shipping to US), or you can get it at your local skate shop such as <a href="http://furnaceskate.com" target="_blank" class="link">furnace skate shop</a>. online purchases are managed securely by paypal.</p>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_s-xclick" />
+				<input type="hidden" name="hosted_button_id" value="2N92R5LK34L9L" />
+				<label><strong>ta ha DVD: $15 (tax and shipping to US included)</strong></label>
+				<input type="image" id="buy_button" src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+				<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+			</form>
+		</div>
+		<div id="order-canceled" class="overlay">
+			<h3 class="title"><strong>order canceled</strong></h3>
+			<p>hmmm. either you canceled your order, or something wen't wrong. wanna try again? <a href="?buy" class="link">view the buy page</a> again.</p>
+		</div>
+		<div id="order-success" class="overlay">
+			<h3 class="title"><strong>order success!</strong></h3>
+			<p>congratulations. you are now the proud owner of <strong>ta ha</strong>. check your mailbox daily for your goods! and thanks for your purchase!</p>
+		</div>
+		<div id="banners" class="overlay">
+			<h3 class="title"><strong>banners</strong> help promote <span>ta ha</span> by sharing these flyers with your friends online.<br />right click > save as... and link back to ta-ha.com !</h3>
+			<img src="images/ta-ha-web-flyer.jpg" alt="ta-ha premiere flyer" />
+			<img src="images/ta-ha-print-flyer.jpg" alt="ta-ha premiere flyer" />
+		</div>
+		<div id="trailer" class="overlay">
+			<iframe class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/murPhEwnpo4?rel=0" frameborder="0"></iframe>
+		</div>
+		<div id="fisher" class="overlay">
+			<iframe src="http://player.vimeo.com/video/19577352?byline=0&amp;portrait=0" width="600" height="443" frameborder="0"></iframe>
+		</div>
+		<div id="billy" class="overlay">
+			<iframe width="480" height="390" src="http://www.youtube.com/embed/F3u95rceWC4" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div id="derrick" class="overlay">
+			<iframe width="480" height="390" src="http://www.youtube.com/embed/cIZxr6ZYP-0" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div id="alec" class="overlay">
+			<iframe width="480" height="390" src="http://www.youtube.com/embed/dfF9c47VMnw" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div id="coverage" class="overlay">
+			<h3 class="title"><strong>coverage</strong> heres some <span>ta ha</span> hype from around the web</h3>
+			<a href="http://www.facebook.com/event.php?eid=176623252365539" target="_blank" class="link">ta ha facebook event page</a>
+			<a href="http://news.furnaceskate.com/post/2394662408" target="_blank" class="link">ta ha premiere coverage from Furnace Skate Shop</a>
+			<a href="http://espn.go.com/action/skateboarding/blog/_/post/6181869/ta-ha-video-reviewed" target="_blank" class="link">ESPN ta ha video review</a>
+			<a href="http://espn.go.com/action/skateboarding/blog/_/post/5943427/skaters-ta-ha-video" target="_blank" class="link">ESPN ta ha photos by ben karpinski</a>
+			<a href="http://veterats.blogspot.com/2010/12/taha-photos.html" target="_blank" class="link">VETERATS premiere photos</a>
+			<a href="http://dead-pixel-productions.blogspot.com/2010/12/ta-ha.html" target="_blank" class="link">DeadPixelProductions ta ha premiere review</a>
+			<a href="http://www.trongyourmind.com/2010/12/ta-ha.html" target="_blank" class="link">trong your mind pics</a>
+			<a href="http://theskateboardmag.com/blogs/paul-animal-chan/2010/12/18/ta-ha-video-premiere/" target="_blank" class="link">The Skateboard Mag Shout Out</a>
+			<a href="http://skateboarding.transworld.net/1000129293/news/ta-ha-trailer-premiere/" target="_blank" class="link">Transworld Skateboarding Announcement</a>
+			<a href="http://www.skateboardermag.com/event/ta-ha-video-premiere-in-long-beach/" target="_blank" class="link">Skateboarder Mag Announcement</a>
+		</div>
+		<div id="screen"><strong class="typeface-js">press <big>esc</big> to go back</strong></div>
+	</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5917637-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
