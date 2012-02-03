@@ -21,6 +21,13 @@
 
 		var a = $('a:not(.link)').click(function (e) {
 			e.preventDefault();
+
+			if (typeof this.id != 'undefined' && this.id == 'watch_all_full_screen') {
+				watch_all.isFullScreen = true;
+				watch_all.css({ width: '90%', height: '85%', top: '10%', left: '5%' });
+				watch_all.children('#watch_all_iframe').css({ width: '100%', height: '100%' });
+				$(this).hide();
+			}
 		});
 		var screen = $('#screen');
 		screen.dblclick(function () { events.clear() });
@@ -28,6 +35,8 @@
 		banners.link = a.filter('#banners-link').click(function () { events.banners.open(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Banners']); });
 		var trailer = $('#trailer');
 		trailer.link = a.filter('#trailer-link').click(function () { events.trailer.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Trailer']); });
+		var watch_all = $('#watch-all');
+		watch_all.link = a.filter('#watch-all-link').click(function () { events.watch_all.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Watch All']); });
 		var fisher = $('#fisher');
 		fisher.link = a.filter('#fisher-link').click(function () { events.fisher.play(); _gaq.push(['_trackEvent', 'Links', 'Click', 'Fisher']); });
 		var billy = $('#billy');
@@ -51,6 +60,23 @@
 				},
 				close: function () {
 					trailer.overlay_out();
+				}
+			},
+			watch_all: {
+				play: function () {
+					watch_all.isFullScreen = false;
+					watch_all.children('#watch_all_iframe').attr('src', 'http://vimeo.com/couchmode/albums/1824015/sort:newest/35999672');
+					watch_all.overlay_in();
+					_gaq.push(['_trackEvent', 'Overlays', 'Open', 'Watch All']);
+				},
+				close: function () {
+					watch_all.overlay_out();
+					watch_all.children('#watch_all_iframe').attr('src', '#');
+					if (watch_all.isFullScreen == true) {
+						watch_all.css({ width: '600px', height: '463px', top: '11%', left: '110%' });
+						watch_all.children('#watch_all_iframe').css({ height: '443px' });
+						watch_all.children('#watch_all_full_screen').show();
+					}
 				}
 			},
 			fisher: {
@@ -145,6 +171,7 @@
 			clear: function () {
 				if (screen.is(':visible')) {
 					events.trailer.close();
+					events.watch_all.close();
 					events.fisher.close();
 					events.billy.close();
 					events.derrick.close();
@@ -173,6 +200,9 @@
 			case '?video':
 			case '?trailer':
 				events.trailer.play();
+				break;
+			case '?watch_all':
+				events.watch_all.play();
 				break;
 			case '?fisher':
 				events.fisher.play();
@@ -237,9 +267,11 @@
 		#banners img { height: 250px }
 		#trailer { width: 480px; height: 390px }
 		#fisher { width: 600px; height: 443px }
+		#watch-all { width: 600px; height: 463px }
+		#watch_all_full_screen { display: block; background: #aaa; color: White; font: bold 14px folks, sans-serif; padding: 2px 0; text-align: center }
 		#billy, #derrick, #alec { width: 480px; height: 390px }
 		#coverage { width: 400px }
-		#coverage a.link { display: block; background: #eee; padding: 2px 5px; margin: 2px 0px; float: left; clear: left; font: bold 14px sans-serif; color: #333 }
+		#coverage a.link { display: block; background: #eee; padding: 2px 5px; margin: 2px 0px; float: left; clear: left; font: bold 16px sans-serif; color: #333 }
 		#coverage a:hover { background: #333; color: #eee }
 		#coverage a:before { content: "› " }
 		#screen { display: none; position: fixed; top: 0px; left: 0px; z-index: 20; width: 100%; height: 100%; background: black; opacity: .7 }
@@ -271,12 +303,7 @@
 		</div>
 		<div id="links">
 			<a id="trailer-link" href="?trailer">watch the trailer</a>
-			<a id="fisher-link" href="?fisher">watch ben fishers part</a>
-			<a id="derrick-link" href="?derrick">watch derrick wilsons part</a>
-			<span class="clear"></span>
-			<a id="alec-link" href="?alec">watch alec jamirs part</a>
-			<a id="billy-link" href="?billy">watch billy davenports part</a>
-			<a id="banners-link" href="?banners">spread the word</a>
+			<a id="watch-all-link" href="?fisher">watch the WHOLE video online for FREE</a>
 			<a id="coverage-link" href="?coverage">coverage</a>
 		</div>
 		<div id="buy" class="overlay">
@@ -305,6 +332,10 @@
 		</div>
 		<div id="trailer" class="overlay">
 			<iframe class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/murPhEwnpo4?rel=0" frameborder="0"></iframe>
+		</div>
+		<div id="watch-all" class="overlay">
+			<iframe id="watch_all_iframe" src="blank.htm" width="600" height="443" frameborder="0"></iframe>
+			<a href="http://vimeo.com/couchmode/albums/1824015/sort:newest/35999672" id="watch_all_full_screen">Watch in full screen &raquo;</a>
 		</div>
 		<div id="fisher" class="overlay">
 			<iframe src="http://player.vimeo.com/video/19577352?byline=0&amp;portrait=0" width="600" height="443" frameborder="0"></iframe>
